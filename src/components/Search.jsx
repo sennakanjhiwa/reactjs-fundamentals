@@ -1,0 +1,21 @@
+import { useState } from "react";
+
+function Search(props) {
+    const [search, setSearch] = useState("");
+
+    const onSearchChange = (event) => {
+        setSearch(event.target.value);
+        props.onSearchChange(event.target.value);
+    };
+
+    return (
+        <>
+            <div>
+                Cari artikel : <input onChange={onSearchChange} type="text" />{""}
+            </div>
+            <small>Ditemikan 0 data dengan pencarian kata {search}</small>
+        </>
+    )
+}
+
+export default Search;
