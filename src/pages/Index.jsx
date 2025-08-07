@@ -4,16 +4,18 @@ import Search from "../components/Search";
 import { useState } from "react";
 
 function Homepage() {
-    const [posts, setPosts] = useState(dataPosts)
+    const [posts, setPosts] = useState(dataPosts);
+    const [totalPosts, setTotalPosts] = useState(0);
 
     const onSearchChange = (value) => {
         const filteredPosts = dataPosts.filter(item => item.title.includes(value));
         setPosts(filteredPosts);
+        setTotalPosts(filteredPosts.length);
     };
     return (
         <>
             <h1>Simple Blogs</h1>
-            <Search onSearchChange={onSearchChange} />
+            <Search onSearchChange={onSearchChange} totalPosts={totalPosts} />
             {posts.map((props, index) => (
                 <Article {...props} key={index} />
             ))}
