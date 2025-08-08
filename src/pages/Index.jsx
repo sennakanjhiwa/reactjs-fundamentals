@@ -20,6 +20,10 @@ function Homepage() {
             .then(json => setExternalPosts(json));
     }, []);
 
+    useEffect(() => {
+        console.log("ada perubahan post baru");
+    }, [posts]);
+
     return (
         <>
             <h1>Simple Blogs</h1>
