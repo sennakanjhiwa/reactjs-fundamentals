@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 function Homepage() {
     const [posts, setPosts] = useState(dataPosts);
     const [totalPosts, setTotalPosts] = useState(0);
+    const [externalPosts, setExternalPosts] = useState([]);
 
     const onSearchChange = (value) => {
         const filteredPosts = dataPosts.filter(item => item.title.includes(value));
@@ -14,12 +15,10 @@ function Homepage() {
     };
 
     useEffect(() => {
-        console.log("render");
-
-        return () => {
-            console.log("cleanup");
-        };
-    }, [posts]);
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => response.json())
+            .then(json => setExternalPosts(json));
+    }, []);
 
     return (
         <>
@@ -27,6 +26,11 @@ function Homepage() {
             <Search onSearchChange={onSearchChange} totalPosts={totalPosts} />
             {posts.map((props, index) => (
                 <Article {...props} key={index} />
+            ))}
+            <hr />
+            <h2>External Posts</h2>
+            {externalPosts.map((item, index) => (
+                <div key={index}>- {item.title}</div>
             ))}
         </>
     );
