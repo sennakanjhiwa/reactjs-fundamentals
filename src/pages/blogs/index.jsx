@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Blogs() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch("https://jsonplaceholder.typicode.com/posts")
             .then(response => response.json())
             .then(json => setPosts(json));
     }, []);
@@ -13,10 +14,12 @@ function Blogs() {
         <>
         <h2>My Blog Posts</h2>
         {posts.map((item, index) => (
-            <div key={index}>- {item.title}</div>
+            <div key={index}>
+                <Link to={`/blog/${item.id}`}>- {item.title}</Link>
+            </div>
         ))}
         </>
-    )
+    );
 }
 
 export default Blogs;
