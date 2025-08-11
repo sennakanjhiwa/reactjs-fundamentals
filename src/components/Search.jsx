@@ -16,7 +16,7 @@ function Search(props) {
     return (
         <>
             <div>
-                Cari artikel : 
+                Cari artikel :{" "}
                 <input 
                 onChange={(e) => setSearch(e.target.value)} 
                 onKeyDown={searchKeyDown}
