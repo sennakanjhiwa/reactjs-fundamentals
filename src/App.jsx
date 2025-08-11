@@ -1,14 +1,20 @@
 import './App.css';
-import Homepage from './pages/Index';
+import { GlobalContext } from './context';
+import { RouterProvider } from 'react-router-dom';
+import {router} from './routes';
 
 function App() {
+  const user = {
+    username : "Senna Bhany Majid"
+  }
+
   return (
-    <>
-      <div className="card">
-        <Homepage />
-      </div>
-    </>
-  )
+    <div className="card">
+      <GlobalContext.Provider value={user}>
+        <RouterProvider router={router} />
+      </GlobalContext.Provider>
+    </div>
+  );
 }
 
-export default App
+export default App;
